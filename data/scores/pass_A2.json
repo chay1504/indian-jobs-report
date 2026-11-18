@@ -1,0 +1,386 @@
+[
+  {
+    "occ3": "431",
+    "title": "Numerical Clerks",
+    "exposure": 9,
+    "rationale": "Computing, posting and verifying accounting, payroll and statistical data is routine digital information processing that AI and modern accounting software already handle well. In India the work is mostly salaried, graduate-held and concentrated in banking and accounting firms, so it sits squarely in the path of automation; only the counter and cash-handling duties of bank clerks require physical presence."
+  },
+  {
+    "occ3": "432",
+    "title": "Material Recording and Transport Clerks",
+    "exposure": 5,
+    "rationale": "Inventory, production-scheduling and transport-coordination records are information work that AI-driven inventory and logistics systems can largely absorb. In India, however, many of these workers are store keepers, stock verifiers and warehouse staff who physically receive, count, pick and dispatch goods, which keeps a substantial part of the job hands-on."
+  },
+  {
+    "occ3": "441",
+    "title": "Other Clerical Support Workers",
+    "exposure": 5,
+    "rationale": "The group mixes highly exposed desk tasks (filing, coding, proof-reading, personnel records, correspondence) with physical roles that dominate Indian employment, such as postmen, office peons, daftries, process servers and patwaris doing field work. AI can sharply shrink the paper-processing share, but delivery, errand-running and in-person field duties are largely untouched."
+  },
+  {
+    "occ3": "511",
+    "title": "Travel Attendants, Conductors and Guides",
+    "exposure": 3,
+    "rationale": "Bus conductors, railway ticket examiners, guards, cabin crew and tour guides work in person, ensuring passenger safety, checking tickets and serving or escorting people. Digital ticketing and AI-powered travel information erode some ticketing and guiding tasks, but the core job requires physical presence on the vehicle or site."
+  },
+  {
+    "occ3": "512",
+    "title": "Cooks",
+    "exposure": 1,
+    "rationale": "Cooking in homes, dhabas, hotels and institutional kitchens is manual, real-time physical work. Two thirds of Indian cooks are salaried but almost all informally, many in households; AI may help with menu planning or recipes but does not touch the core job."
+  },
+  {
+    "occ3": "513",
+    "title": "Waiters and Bartenders",
+    "exposure": 2,
+    "rationale": "Waiters and bartenders physically serve food and drinks and interact with customers in person. QR-code ordering and app-based billing take over small parts of order-taking, but the job remains overwhelmingly physical and interpersonal, especially in India's largely informal, casual-wage food service sector."
+  },
+  {
+    "occ3": "514",
+    "title": "Hairdressers, Beauticians and Related Workers",
+    "exposure": 1,
+    "rationale": "Cutting hair, shaving, facials and make-up are hands-on personal services, mostly delivered by self-employed barbers and beauticians in India. AI can at most help with booking or style suggestions; the core work is untouched."
+  },
+  {
+    "occ3": "515",
+    "title": "Building and Housekeeping Supervisors",
+    "exposure": 3,
+    "rationale": "Housekeeping supervisors, caretakers and domestic housekeepers organize and carry out cleaning and upkeep of physical premises, and in India many also perform the work themselves. AI can help with scheduling, rostering and inventory of supplies, but supervising staff and maintaining buildings requires presence on site."
+  },
+  {
+    "occ3": "516",
+    "title": "Other Personal Services Workers",
+    "exposure": 4,
+    "rationale": "This group is unusually mixed: astrologers and fortune tellers deliver a conversational, information-based service that AI astrology apps are already imitating at scale, while pet groomers, undertakers and driving instructors do hands-on physical work. The blend yields moderate exposure, with the astrology segment far more exposed than the rest."
+  },
+  {
+    "occ3": "521",
+    "title": "Street and Market Salespersons",
+    "exposure": 1,
+    "rationale": "Street and market vendors in India are almost all self-employed, selling from stalls and preparing street food in person. Digital payments and phone ordering touch the margins, but haggling, handling goods and cooking on the street are physical and essentially unaffected by AI."
+  },
+  {
+    "occ3": "522",
+    "title": "Shop Salespersons",
+    "exposure": 3,
+    "rationale": "Most Indian shop salespersons are self-employed kirana and small-shop owners who serve customers in person, handle stock and extend credit to known buyers. AI may help with inventory, ordering and pricing, and e-commerce competition presses on the sector, but the face-to-face selling and shopkeeping core remains."
+  },
+  {
+    "occ3": "523",
+    "title": "Cashiers and Ticket Clerks",
+    "exposure": 6,
+    "rationale": "In India this group is dominated by graduate bank cashiers and railway or transport ticket clerks whose work is recording and processing payments and bookings on computers. UPI, online ticketing and AI-assisted self-service are already displacing much of the counter work, though cash handling and in-person customer service keep some presence requirement."
+  },
+  {
+    "occ3": "524",
+    "title": "Other Sales Workers",
+    "exposure": 5,
+    "rationale": "This catch-all mixes call-centre and telesales staff, customer-care executives and collections agents, whose voice and chat work is highly exposed to AI agents, with door-to-door salespeople, petrol pump attendants, delivery workers, counter attendants and models whose work is physical. The average is moderate, but the contact-centre segment faces major restructuring."
+  },
+  {
+    "occ3": "531",
+    "title": "Child Care Workers and Teachers' Aides",
+    "exposure": 2,
+    "rationale": "Child care workers, ayahs and teachers' aides, over half employed by the public sector in India, supervise, feed and care for young children in person. AI might help with record-keeping or activity ideas, but the core work of physical care and supervision is not touched."
+  },
+  {
+    "occ3": "532",
+    "title": "Personal Care Workers in Health Services",
+    "exposure": 2,
+    "rationale": "Health care assistants and home-based care workers help patients with mobility, bathing, feeding and daily living. This is hands-on, interpersonal care; AI can assist only with peripheral charting and scheduling."
+  },
+  {
+    "occ3": "541",
+    "title": "Protective Service Workers",
+    "exposure": 3,
+    "rationale": "Security guards, watchmen, police constables, fire-fighters and prison guards protect people and property through physical presence and patrolling. AI-enabled CCTV analytics and digital reporting may reduce some monitoring headcount, but responding to incidents and maintaining order in person remain the core of the job."
+  },
+  {
+    "occ3": "611",
+    "title": "Market Gardeners and Crop Growers",
+    "exposure": 2,
+    "rationale": "India's market-oriented cultivators are overwhelmingly self-employed small farmers doing physical field work. AI advisory tools for weather, pest identification, soil health and crop prices can help with decisions at the margins, but planting, tending and harvesting remain manual."
+  },
+  {
+    "occ3": "612",
+    "title": "Animal Producers",
+    "exposure": 1,
+    "rationale": "Livestock, dairy and poultry producers in India are nearly all self-employed with low formal education, and their work is daily hands-on animal care. AI may offer veterinary or feed advice via phone apps, but it barely touches the core work."
+  },
+  {
+    "occ3": "613",
+    "title": "Mixed Crop and Animal Workers",
+    "exposure": 1,
+    "rationale": "Mixed crop-and-animal farmers do physical field and livestock work, almost entirely as self-employed household enterprises. AI advisory services are peripheral at most."
+  },
+  {
+    "occ3": "621",
+    "title": "Forestry and Related Workers",
+    "exposure": 1,
+    "rationale": "Forestry workers plant, tend, fell and gather in forests, often as casual labour. The work is outdoor, physical and unpredictable, with essentially no AI involvement in daily tasks."
+  },
+  {
+    "occ3": "622",
+    "title": "Fishery Workers, Hunters and Trappers",
+    "exposure": 1,
+    "rationale": "Fishers and aquaculture workers in India are mostly self-employed, working boats, nets and ponds by hand. AI-based fish-finding or weather advisories are marginal aids; the core work is physical."
+  },
+  {
+    "occ3": "631",
+    "title": "Subsistence Crop Farmers",
+    "exposure": 1,
+    "rationale": "Subsistence crop farmers grow food mainly for their own households with very low education and almost no market or digital interface. AI has essentially no effect on their daily work beyond occasional advisory information."
+  },
+  {
+    "occ3": "632",
+    "title": "Subsistence Livestock Farmers",
+    "exposure": 0,
+    "rationale": "Subsistence livestock keepers tend animals for household needs, with median education below primary. The work is entirely physical and AI has no meaningful impact on it."
+  },
+  {
+    "occ3": "633",
+    "title": "Subsistence Mixed Crop and Livestock Farmers",
+    "exposure": 1,
+    "rationale": "Subsistence mixed farmers combine crop growing and animal rearing for household consumption. The work is manual and outdoor, and AI is limited to marginal advisory information."
+  },
+  {
+    "occ3": "634",
+    "title": "Subsistence Fishers, Hunters, Trappers and Gatherers",
+    "exposure": 0,
+    "rationale": "Subsistence fishers, hunters, trappers and forest gatherers work physically in natural environments, and the median worker in India is not literate. AI has essentially no role in this work."
+  },
+  {
+    "occ3": "711",
+    "title": "Building Frames and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Masons, bricklayers, stonecutters, concrete workers and carpenters do heavy manual work on construction sites, about half as casual labourers in India. AI has essentially no impact on the core tasks."
+  },
+  {
+    "occ3": "712",
+    "title": "Building Finishers and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Roofers, tile setters, plasterers, glaziers, plumbers and AC mechanics perform skilled hands-on work in buildings, much of it casual and informal in India. AI might help with troubleshooting or estimates for plumbers and AC mechanics, but the core work is physical."
+  },
+  {
+    "occ3": "713",
+    "title": "Painters, Builders, Structure Cleaners and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Building painters, spray painters and structure cleaners do manual work on site, mostly as casual labour in India. AI does not touch the core tasks."
+  },
+  {
+    "occ3": "721",
+    "title": "Sheet and Structural Metal Workers, Moulders and Welders, and Related Workers",
+    "exposure": 1,
+    "rationale": "Welders, sheet metal workers, moulders, riggers and structural metal erectors do physical fabrication and erection work in workshops and on sites. AI has minimal effect on the core skills involved."
+  },
+  {
+    "occ3": "722",
+    "title": "Blacksmiths, Tool Makers and Related Trades Workers",
+    "exposure": 2,
+    "rationale": "Blacksmiths, tool makers, machine tool setters and grinders shape and finish metal by hand and with machines. CNC programming and AI-assisted process optimisation touch the machine-setting side, but the work is predominantly hands-on in small Indian workshops."
+  },
+  {
+    "occ3": "723",
+    "title": "Machinery Mechanics and Repairers",
+    "exposure": 2,
+    "rationale": "Motor vehicle, machinery, aircraft and bicycle mechanics diagnose and repair equipment by hand, often in small self-run workshops in India. AI diagnostic tools can speed fault-finding, but the repair work itself is physical."
+  },
+  {
+    "occ3": "731",
+    "title": "Handicraft Workers",
+    "exposure": 2,
+    "rationale": "Handicraft workers such as jewellers, potters, weavers, embroiderers, woodcarvers and sign painters produce goods by hand, mostly as self-employed artisans in India. AI can generate designs and patterns and support online selling, but the craft production itself remains manual."
+  },
+  {
+    "occ3": "732",
+    "title": "Printing Trades Workers",
+    "exposure": 4,
+    "rationale": "Printing trades combine pre-press work (typesetting, layout, imaging) that is largely digital and exposed to AI design and layout tools with physical operation of presses, photocopiers and binding machines. Print demand is also being eroded by digital media, giving moderate exposure overall."
+  },
+  {
+    "occ3": "741",
+    "title": "Electrical Equipment Installers and Repairers",
+    "exposure": 2,
+    "rationale": "Electricians, electrical fitters and line installers do hands-on installation and repair work in buildings and on networks. AI may help with diagnostics, estimates and paperwork, but the core work requires physical presence and manual skill."
+  },
+  {
+    "occ3": "742",
+    "title": "Electronics and Telecommunication Installers and Repairers",
+    "exposure": 2,
+    "rationale": "Electronics, mobile-phone and ICT equipment repairers and installers work hands-on with devices, cabling and network hardware, about half self-employed in India. AI can assist diagnosis and configuration, but repair and installation remain physical."
+  },
+  {
+    "occ3": "751",
+    "title": "Food Processing and Related Trade Workers",
+    "exposure": 1,
+    "rationale": "Butchers, bakers, dairy makers, food preservers and bidi rollers (tobacco products is the top industry) do manual food and tobacco processing, mostly as self-employed home or small-unit workers in India. AI has little effect on these tasks."
+  },
+  {
+    "occ3": "752",
+    "title": "Wood Treaters, Cabinet-makers and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Cabinet makers, wood treaters and woodworking machine operators build furniture and wood products by hand and machine. AI might assist with design, but the core work is physical craftsmanship."
+  },
+  {
+    "occ3": "753",
+    "title": "Garment and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Tailors, embroiderers, shoemakers and upholsterers in India are mostly self-employed and work by hand or on sewing machines. AI-driven pattern making and design affect a small number of pattern makers, but the core sewing and stitching is untouched."
+  },
+  {
+    "occ3": "754",
+    "title": "Other Craft and Related Workers",
+    "exposure": 2,
+    "rationale": "This mixed group includes divers, shot-firers and fumigators doing physical work, plus garment and product quality checkers and testers. Computer-vision inspection can automate parts of the grading and testing role, but most of the work remains hands-on."
+  },
+  {
+    "occ3": "811",
+    "title": "Mining and Mineral Processing Plant Operators",
+    "exposure": 1,
+    "rationale": "Miners, quarriers, drillers and mineral-processing machine operators work in physical, hazardous environments, often as casual labour. AI-based process control is marginal to their daily work."
+  },
+  {
+    "occ3": "812",
+    "title": "Metal Processing and Finishing Plant Operators",
+    "exposure": 2,
+    "rationale": "Metal processing and plating operators run furnaces, rolling mills and finishing lines. Process-control and predictive-maintenance AI can optimise operations and reduce staffing at the margins, but operators still tend equipment physically."
+  },
+  {
+    "occ3": "813",
+    "title": "Chemical and Photographic Products Plant and Machine Operators",
+    "exposure": 2,
+    "rationale": "Chemical and photographic plant operators run and monitor mixing, reaction and processing equipment. AI-driven process control can assist with monitoring, but much of the work in Indian plants involves hands-on operation of machines and materials."
+  },
+  {
+    "occ3": "814",
+    "title": "Rubber, Plastic and Paper Products Machine Operators",
+    "exposure": 1,
+    "rationale": "Rubber, plastic and paper products machine operators set up, feed and tend production machines on the shop floor. AI has little bearing on these physical machine-tending tasks."
+  },
+  {
+    "occ3": "815",
+    "title": "Textile, Fur and Leather Products Machine Operators",
+    "exposure": 1,
+    "rationale": "Spinning, weaving, sewing-machine, dyeing and laundry machine operators tend textile and leather machinery by hand. The work is physical and repetitive, and AI barely affects it."
+  },
+  {
+    "occ3": "816",
+    "title": "Food and Related Products Machine Operators",
+    "exposure": 1,
+    "rationale": "Food machine operators run equipment for milling, processing and packaging food, often in small units. The work is physical machine tending with little AI involvement."
+  },
+  {
+    "occ3": "817",
+    "title": "Wood Processing and Paper Making Plant Operators",
+    "exposure": 1,
+    "rationale": "Wood processing and paper-making plant operators run sawmills, veneer and pulp equipment, frequently as casual labour. AI does not meaningfully touch their daily physical work."
+  },
+  {
+    "occ3": "818",
+    "title": "Other Stationary Plant and Machine Operators",
+    "exposure": 1,
+    "rationale": "Glass and ceramics plant operators, boiler operators, packing and bottling machine operators and gem machine operators tend physical production equipment. AI has minimal effect on their core tasks."
+  },
+  {
+    "occ3": "821",
+    "title": "Assemblers",
+    "exposure": 2,
+    "rationale": "Assemblers put together mechanical and electronic components on factory lines. Robotics and AI-based visual inspection can automate parts of assembly and quality checks, but the core work is still manual."
+  },
+  {
+    "occ3": "831",
+    "title": "Locomotive Engine Drivers and Related Workers",
+    "exposure": 2,
+    "rationale": "Locomotive drivers, brakers and signal and switch operators run trains and railway equipment. Automated signalling and train-control systems assist, but the work requires real-time physical presence and is little affected by AI in India."
+  },
+  {
+    "occ3": "832",
+    "title": "Car, Van and Motorcycle Drivers",
+    "exposure": 2,
+    "rationale": "Car, taxi, auto and motorcycle drivers, two-thirds self-employed in India, spend their working time driving in highly unstructured traffic. AI already shapes dispatch and routing on ride-hailing apps, but autonomous driving is far from replacing drivers on Indian roads."
+  },
+  {
+    "occ3": "833",
+    "title": "Heavy Truck and Bus Drivers",
+    "exposure": 2,
+    "rationale": "Bus and truck drivers operate heavy vehicles on Indian roads and handle loading, passengers and vehicle care. AI helps with route planning and fleet management, but the driving itself remains a physical, real-time task with no near-term automation in India."
+  },
+  {
+    "occ3": "834",
+    "title": "Mobile Plant Operators",
+    "exposure": 1,
+    "rationale": "Tractor, excavator, crane and forklift operators control heavy machinery on farms, sites and warehouses. The work is physical and situational; AI has minimal effect."
+  },
+  {
+    "occ3": "835",
+    "title": "Ships’ Deck Crews and Related Workers",
+    "exposure": 1,
+    "rationale": "Ships' deck crews and boatmen handle mooring, cargo and vessel upkeep, mostly self-employed in small craft in India. The work is physical and AI barely touches it."
+  },
+  {
+    "occ3": "911",
+    "title": "Domestic, Hotel and Office Cleaners and Helpers",
+    "exposure": 0,
+    "rationale": "Domestic, hotel and office cleaners and helpers do manual cleaning and household chores, a large share employed directly by Indian households. AI has essentially no impact on this work."
+  },
+  {
+    "occ3": "912",
+    "title": "Vehicle, Window, Laundry and Other Hand Cleaning Workers",
+    "exposure": 0,
+    "rationale": "Hand launderers, ironing workers, vehicle washers and window cleaners do purely manual work, mostly self-employed. AI does not touch the job."
+  },
+  {
+    "occ3": "921",
+    "title": "Agricultural, Forestry and Fishery Labourers",
+    "exposure": 0,
+    "rationale": "Agricultural, forestry and fishery labourers, 95% casual wage workers in India, do manual field and farm work. AI has essentially no impact on their daily work."
+  },
+  {
+    "occ3": "931",
+    "title": "Mining and Construction Labourers",
+    "exposure": 0,
+    "rationale": "Mining and construction labourers carry, dig and load materials on sites, almost all as casual labour. The work is entirely physical and unaffected by AI."
+  },
+  {
+    "occ3": "932",
+    "title": "Manufacturing Labourers",
+    "exposure": 1,
+    "rationale": "Hand packers and manufacturing labourers perform manual loading, packing and helper tasks in factories and brick kilns. Automation may reduce some packing jobs, but AI itself touches little of this physical work."
+  },
+  {
+    "occ3": "933",
+    "title": "Transport and Storage Labourers",
+    "exposure": 1,
+    "rationale": "Rickshaw pullers, cart drivers, freight handlers, loaders and shelf fillers move goods and people by hand. AI-driven warehouse management may change how work is assigned, but the work itself is physical."
+  },
+  {
+    "occ3": "941",
+    "title": "Food Preparation Assistants",
+    "exposure": 1,
+    "rationale": "Fast-food preparers and kitchen helpers chop, wash, assemble and serve food in kitchens. The work is manual and AI has essentially no role in it."
+  },
+  {
+    "occ3": "951",
+    "title": "Street and Related Service Workers",
+    "exposure": 0,
+    "rationale": "Street service workers such as shoe-shiners and similar roadside service providers do manual work in public spaces. AI does not affect this work."
+  },
+  {
+    "occ3": "952",
+    "title": "Street Vendors (excluding Food)",
+    "exposure": 0,
+    "rationale": "Non-food street vendors and hawkers are almost all self-employed, with low education, selling goods door to door or along streets. The work is physical and face-to-face, with no meaningful AI impact."
+  },
+  {
+    "occ3": "961",
+    "title": "Refuse Workers",
+    "exposure": 0,
+    "rationale": "Garbage collectors, waste sorters and sweepers do manual sanitation work. AI has essentially no role in their daily tasks."
+  },
+  {
+    "occ3": "962",
+    "title": "Other Elementary Workers",
+    "exposure": 1,
+    "rationale": "Messengers, delivery workers, porters, meter readers, ushers and odd-job workers do physical errands and on-site tasks. Smart meters and app-based dispatch erode a few roles, but the work remains largely manual."
+  }
+]

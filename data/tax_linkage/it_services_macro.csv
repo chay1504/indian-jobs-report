@@ -1,0 +1,17 @@
+item,fy,value,unit,source
+"Telecom, computer & information services exports (BPM6 credit)",2022-23,152285.0,USD million,"Economic Survey 2025-26 Statistical Appendix Table 5.3B (RBI), PDF p.3"
+"Telecom, computer & information services exports (BPM6 credit)",2023-24,163610.0,USD million,ES 2025-26 Stat. App. Table 5.3B (RBI)
+"Telecom, computer & information services exports (BPM6 credit)",2024-25 (PR),183347.0,USD million,ES 2025-26 Stat. App. Table 5.3B (RBI)
+"Telecom, computer & information services exports (BPM6 credit)",2025-26 Apr-Sep (P),98291.0,USD million,ES 2025-26 Stat. App. Table 5.3B (RBI)
+Other business services exports (credit; includes GCC-type professional/R&D services),2024-25 (PR),107212.0,USD million,ES 2025-26 Stat. App. Table 5.3B (RBI)
+Total services exports (credit),2024-25 (PR),387553.0,USD million,ES 2025-26 Stat. App. Table 5.3B (RBI)
+IT&ITeS industry revenue incl. hardware (Nasscom estimate),2024-25,283.0,USD billion,Economic Survey 2025-26 ch.7 para 7.32 (printed p.279) citing Nasscom
+Global Capability Centres in India,FY24,1700.0,count,ES 2025-26 ch.7 para 7.33 & Chart VII.12 (Nasscom)
+GCC headcount,FY24(E),19.0,lakh persons,ES 2025-26 ch.7 Chart VII.12 (Nasscom)
+GCC revenue,FY24(E),64.6,USD billion,ES 2025-26 ch.7 Chart VII.12 (Nasscom)
+Software services exports growth (RBI survey),2024-25,7.3,% YoY,ES 2025-26 ch.4 para 4.59 (printed p.171) citing RBI survey 2024-25
+"Six listed IT firms: standalone current tax (TCS, Infosys, HCLTech, Wipro, TechM, LTIMindtree)",2024-25,35737.4,Rs crore,firm_median_pay.csv (annual reports); includes overseas-branch taxes
+Six listed IT firms: standalone current tax,2025-26,34390.7,Rs crore,firm_median_pay.csv (annual reports)
+Six listed IT firms: standalone employee benefits expense,2025-26,291129.2,Rs crore,firm_median_pay.csv; includes onsite staff pay
+Six listed IT firms: headcount (as reported),2025-26,1618020.0,persons,firm_median_pay.csv
+Computer & related services: share of company gross tax payable,2023-24 (returns),10.9,%,Tax agent: data/tax/corporate_tax_by_industry_FY2023-24.csv (Receipt Budget 2026-27 Annex-7 appendix)

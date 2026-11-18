@@ -1,0 +1,386 @@
+[
+  {
+    "occ3": "111",
+    "title": "Legislators and Senior Officials",
+    "exposure": 6,
+    "rationale": "Policy formulation, legislative drafting, briefings and administrative oversight are knowledge work where AI can draft, summarise and analyse heavily. But the core of the role in India is political representation, negotiation, field inspection and accountability for public decisions, which remain human and in-person."
+  },
+  {
+    "occ3": "121",
+    "title": "Business Services and Administration Managers",
+    "exposure": 6,
+    "rationale": "Finance, HR, planning and administration management is largely document, spreadsheet and communication work that AI tools already accelerate. In India nearly half are self-employed heads of trading and service businesses, so much of the job is supervising staff, dealing with clients and on-the-ground decision-making."
+  },
+  {
+    "occ3": "131",
+    "title": "Production Managers in Agriculture, Forestry and Fisheries",
+    "exposure": 4,
+    "rationale": "Planning budgets, schedules, records and market decisions for plantations, farms and fisheries can be supported by AI analytics and advisories. Most of the job, however, is supervising labour and physical operations in the field, and many Indian holders are self-employed farm operators."
+  },
+  {
+    "occ3": "133",
+    "title": "Information and Communications Technology Services Manager",
+    "exposure": 7,
+    "rationale": "ICT service managers plan and oversee software, systems and telecom operations, a domain where AI is reshaping the work of the teams they manage and many of their own planning and reporting tasks. People leadership, vendor relationships and accountability keep it from the very top band."
+  },
+  {
+    "occ3": "141",
+    "title": "Hotel and Restaurant Managers",
+    "exposure": 4,
+    "rationale": "Bookings, pricing, inventory and accounts can be handled by software and AI, but running a hotel or restaurant is mostly in-person: supervising kitchen and service staff, handling guests and solving problems on the floor. In India many are owner-managers of small, informal establishments."
+  },
+  {
+    "occ3": "143",
+    "title": "Other Services Managers",
+    "exposure": 5,
+    "rationale": "These managers run bank branches, logistics, travel, call-centre and recreation operations; scheduling, reporting and customer-contact processes are increasingly AI-assisted. A substantial share of the work is still supervising staff and service delivery on site."
+  },
+  {
+    "occ3": "212",
+    "title": "Mathematicians, Actuaries and Statisticians",
+    "exposure": 9,
+    "rationale": "Statistical modelling, actuarial calculation and quantitative analysis are fully digital and squarely in domains where AI is improving fast. In India these are highly educated, formally employed analysts in R&D and government statistics, whose work products are code, models and reports."
+  },
+  {
+    "occ3": "214",
+    "title": "Engineering Professionals (excluding Electro technology)",
+    "exposure": 6,
+    "rationale": "Engineers' design, calculation, drafting, estimation and documentation are computer work that AI and generative design tools increasingly speed up. Yet much of the Indian workforce is in civil engineering and construction, where site supervision, inspection and coordination with contractors require physical presence."
+  },
+  {
+    "occ3": "216",
+    "title": "Architects, Planners, Surveyors and Designers",
+    "exposure": 7,
+    "rationale": "Architectural drawing, product and garment design, graphic and multimedia design and cartography are largely digital and highly exposed to generative AI. Surveying fieldwork, site visits and client relationships temper the score for the group as a whole."
+  },
+  {
+    "occ3": "222",
+    "title": "Nursing and Midwifery Professionals",
+    "exposure": 4,
+    "rationale": "Nursing in India is hands-on patient care in hospitals and clinics, with physical presence essential. AI can help with charting, triage and care planning, but the core tasks of administering treatment, monitoring and caring for patients remain human."
+  },
+  {
+    "occ3": "224",
+    "title": "Paramedical Practitioners",
+    "exposure": 4,
+    "rationale": "Paramedical practitioners diagnose and treat common conditions, often in rural areas and as self-employed practitioners. AI decision support can meaningfully assist diagnosis and advice, but examination, procedures and patient trust require in-person work."
+  },
+  {
+    "occ3": "226",
+    "title": "Other Health Professionals",
+    "exposure": 4,
+    "rationale": "Dentists, physiotherapists, optometrists and audiologists perform hands-on clinical work, and pharmacists in India largely dispense in retail shops. AI helps with diagnostics, records and drug-interaction checks, while the core work requires physical presence."
+  },
+  {
+    "occ3": "232",
+    "title": "Vocational Education Teachers",
+    "exposure": 5,
+    "rationale": "Lesson preparation, assessment and content delivery can be substantially AI-assisted. However, vocational teaching centres on hands-on demonstration and supervised practice of trades and skills, which keeps a large in-person component."
+  },
+  {
+    "occ3": "234",
+    "title": "Primary School and Early Childhood Teachers",
+    "exposure": 5,
+    "rationale": "AI can help prepare lessons, worksheets and assessments, but primary and pre-primary teaching in India is mostly in-classroom work with young children, much of it in government schools with limited technology. Classroom management, care and foundational literacy work require human presence."
+  },
+  {
+    "occ3": "241",
+    "title": "Finance Professionals",
+    "exposure": 7,
+    "rationale": "Accounting, bookkeeping, tax filing and financial analysis are predominantly computer-based knowledge work where AI is already highly capable. Client advice, judgment, audit responsibility and regulatory sign-off keep a human role, but productivity gains could sharply reduce headcount needs."
+  },
+  {
+    "occ3": "243",
+    "title": "Sales, Marketing and Public Relations Professionals",
+    "exposure": 6,
+    "rationale": "Marketing, advertising and PR content and analysis are highly AI-exposed digital work. In India a large share are technical and medical sales representatives working in wholesale and retail trade, whose field visits and relationship selling are less exposed."
+  },
+  {
+    "occ3": "252",
+    "title": "Database and Network Professionals",
+    "exposure": 8,
+    "rationale": "Database administration, systems administration and network engineering are computer-based technical work where AI coding and operations tools are advancing quickly. Some physical hardware and on-site infrastructure work remains, but most core tasks are digital."
+  },
+  {
+    "occ3": "262",
+    "title": "Librarians, Archivists and Curators",
+    "exposure": 6,
+    "rationale": "Cataloguing, indexing, information retrieval and reference services are information work that AI search and metadata tools can largely handle. Handling physical collections, preservation and in-person service in Indian libraries, archives and museums provide some barrier."
+  },
+  {
+    "occ3": "264",
+    "title": "Authors, Journalists and Linguists",
+    "exposure": 8,
+    "rationale": "Writing, editing, translation and interpretation are digital language tasks where AI is already very strong, with translation especially exposed. Field reporting, interviewing and original investigative journalism retain some human core."
+  },
+  {
+    "occ3": "311",
+    "title": "Physical and Engineering Science Technicians",
+    "exposure": 5,
+    "rationale": "Draughting, calculation and data analysis tasks are exposed to AI, but many Indian technicians work in electricity, utilities and government departments doing testing, inspection and maintenance on site. The work is a mix of technical knowledge and hands-on physical tasks."
+  },
+  {
+    "occ3": "313",
+    "title": "Process Control Technicians",
+    "exposure": 4,
+    "rationale": "Monitoring control panels and process data is increasingly supported by AI-driven predictive control and anomaly detection. Operators still have to physically inspect, adjust and maintain plant equipment in power, water and chemical facilities, often with limited automation in India."
+  },
+  {
+    "occ3": "315",
+    "title": "Ship and Aircraft Controllers, and Technicians",
+    "exposure": 4,
+    "rationale": "Pilots, ship officers, ship engineers and air traffic controllers work in real-time, safety-critical physical environments with heavy regulation. AI assists with navigation, scheduling and systems monitoring, but the core responsibility for operating vessels and aircraft remains human."
+  },
+  {
+    "occ3": "322",
+    "title": "Nursing and Midwifery Associate Professionals",
+    "exposure": 3,
+    "rationale": "Nursing and midwifery associates in India, largely in government health services, provide basic nursing, maternal care and community health outreach in person. AI may help with record-keeping and reporting, but the core work is hands-on care and home visits."
+  },
+  {
+    "occ3": "324",
+    "title": "Veterinary Technicians and Assistants",
+    "exposure": 3,
+    "rationale": "Veterinary technicians examine, treat and care for animals, frequently in rural government veterinary services. The work is mostly physical and hands-on; AI helps at the margins with diagnostics and records."
+  },
+  {
+    "occ3": "331",
+    "title": "Financial and Mathematical Associate Professionals",
+    "exposure": 8,
+    "rationale": "Loan processing, accounting associate work, valuation, statistical support and securities dealing are almost entirely data and document work on computers. AI is rapidly automating credit assessment, reconciliation and trading tasks, though client contact and physical valuations remain."
+  },
+  {
+    "occ3": "333",
+    "title": "Business Service Agents",
+    "exposure": 5,
+    "rationale": "Real estate agents, clearing and forwarding agents and employment agents match parties, handle paperwork and negotiate deals. Document handling and matching are increasingly AI-driven, but in India this is mostly informal, self-employed, relationship-based work with site visits and physical presence."
+  },
+  {
+    "occ3": "335",
+    "title": "Government Regulatory Associate Professionals",
+    "exposure": 6,
+    "rationale": "Tax, licensing, social-benefit and regulatory officials process applications and documents, work that AI and digital governance platforms can heavily automate. Inspections, enforcement and police investigation require physical presence and judgment."
+  },
+  {
+    "occ3": "342",
+    "title": "Sports and Fitness Workers",
+    "exposure": 2,
+    "rationale": "Athletes, coaches and fitness instructors do physical, in-person work. AI may help with performance analytics, training plans and scheduling, but these are peripheral to the core job."
+  },
+  {
+    "occ3": "351",
+    "title": "Information and Communication Technology Operations and User Support Technicians",
+    "exposure": 7,
+    "rationale": "IT operations and user support involve troubleshooting, monitoring and helpdesk communication, much of which AI agents and automated monitoring can already do. Some on-site hardware and network work remains, but the bulk of the tasks are digital."
+  },
+  {
+    "occ3": "411",
+    "title": "General Office Clerks",
+    "exposure": 9,
+    "rationale": "General office clerks perform routine clerical and administrative tasks under established procedures, which AI can largely automate. In India many work in government offices where paper-based processes slow adoption, but the work content itself is very highly exposed."
+  },
+  {
+    "occ3": "413",
+    "title": "Keyboard Operators",
+    "exposure": 10,
+    "rationale": "Typing, word processing and data entry are routine, fully digital information processing. AI with speech and document recognition can already do most of this work today."
+  },
+  {
+    "occ3": "422",
+    "title": "Client Information Workers",
+    "exposure": 7,
+    "rationale": "Contact-centre agents, travel consultants and enquiry clerks handle routine information requests that AI chatbots and voice agents are already absorbing. In-person receptionist work at Indian hospitals, hotels and offices retains a physical presence component."
+  },
+  {
+    "occ3": "432",
+    "title": "Material Recording and Transport Clerks",
+    "exposure": 7,
+    "rationale": "Stock, production and transport clerks keep records and coordinate schedules, which is routine information processing that AI and inventory systems can automate. Physical stock counts and on-site checks in warehouses and depots provide some barrier."
+  },
+  {
+    "occ3": "511",
+    "title": "Travel Attendants, Conductors and Guides",
+    "exposure": 2,
+    "rationale": "Conductors, travel attendants and guides provide in-person services during travel. Ticketing and itinerary information can be automated, but on-board service, passenger handling and guiding are physical and interpersonal."
+  },
+  {
+    "occ3": "513",
+    "title": "Waiters and Bartenders",
+    "exposure": 1,
+    "rationale": "Waiters and bartenders serve food and drinks in person, often in informal Indian eateries. AI has essentially no impact on the core physical service work."
+  },
+  {
+    "occ3": "515",
+    "title": "Building and Housekeeping Supervisors",
+    "exposure": 2,
+    "rationale": "Supervising cleaning staff, domestic housekeeping and building caretaking is physical and interpersonal work. AI might help with scheduling or supply ordering at the margins."
+  },
+  {
+    "occ3": "521",
+    "title": "Street and Market Salespersons",
+    "exposure": 1,
+    "rationale": "Stall, market and street food sellers are overwhelmingly self-employed and informal, selling goods and preparing food in person. AI barely touches the core work beyond digital payments."
+  },
+  {
+    "occ3": "523",
+    "title": "Cashiers and Ticket Clerks",
+    "exposure": 4,
+    "rationale": "Cashiers and ticket clerks handle routine transactions, and digital payments, self-service kiosks and online ticketing are steadily reducing the need for them. Much of the work in Indian banks and stores still involves handling cash and serving customers in person."
+  },
+  {
+    "occ3": "531",
+    "title": "Child Care Workers and Teachers' Aides",
+    "exposure": 2,
+    "rationale": "Child care workers and teachers' aides, often in anganwadis and schools, provide physical care and supervision of children. AI has little role beyond minor record-keeping."
+  },
+  {
+    "occ3": "541",
+    "title": "Protective Service Workers",
+    "exposure": 3,
+    "rationale": "Police constables, security guards, firefighters and prison guards do physical, in-person protective work. AI-driven surveillance and reporting tools assist at the margins, but the core work requires human presence."
+  },
+  {
+    "occ3": "612",
+    "title": "Animal Producers",
+    "exposure": 1,
+    "rationale": "Livestock, dairy and poultry rearing is almost entirely self-employed, physical work in rural India. AI advisories on animal health or prices are peripheral to the daily work."
+  },
+  {
+    "occ3": "621",
+    "title": "Forestry and Related Workers",
+    "exposure": 1,
+    "rationale": "Forestry work in India is manual, outdoor labour planting, tending and harvesting forests. AI has essentially no impact on the daily work."
+  },
+  {
+    "occ3": "631",
+    "title": "Subsistence Crop Farmers",
+    "exposure": 1,
+    "rationale": "Subsistence crop farming is physical, outdoor, self-employed work by workers with little formal education. Phone-based advisories on weather or crop disease are the only peripheral AI touchpoints."
+  },
+  {
+    "occ3": "633",
+    "title": "Subsistence Mixed Crop and Livestock Farmers",
+    "exposure": 1,
+    "rationale": "Subsistence mixed farming, gathering and herding is physical work in rural India. AI has minimal impact beyond occasional advisories."
+  },
+  {
+    "occ3": "711",
+    "title": "Building Frames and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Masonry, bricklaying, carpentry and concrete work are manual construction trades, mostly casual and informal in India. AI has essentially no impact on the core work."
+  },
+  {
+    "occ3": "713",
+    "title": "Painters, Builders, Structure Cleaners and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Painting and cleaning buildings and structures is physical manual work, largely done by casual labourers. AI does not touch the core tasks."
+  },
+  {
+    "occ3": "722",
+    "title": "Blacksmiths, Tool Makers and Related Trades Workers",
+    "exposure": 2,
+    "rationale": "Forging, toolmaking, machine-tool setting and grinding are manual and machine-based skilled trades. AI may assist with CNC programming or quality inspection, but the core work is physical."
+  },
+  {
+    "occ3": "731",
+    "title": "Handicraft Workers",
+    "exposure": 1,
+    "rationale": "Handicraft workers make jewellery, pottery, textiles and wooden crafts by hand, mostly as self-employed artisans. AI may help with design ideas or online selling, but the core craft work is manual."
+  },
+  {
+    "occ3": "741",
+    "title": "Electrical Equipment Installers and Repairers",
+    "exposure": 2,
+    "rationale": "Electricians and line installers do hands-on installation and repair work, largely informal in India. AI may help with diagnostics, quoting or paperwork but not the core job."
+  },
+  {
+    "occ3": "751",
+    "title": "Food Processing and Related Trade Workers",
+    "exposure": 1,
+    "rationale": "Butchers, bakers, sweet makers, dairy processors and bidi rollers do manual food and tobacco processing, mostly self-employed. AI has minimal relevance to their daily work."
+  },
+  {
+    "occ3": "753",
+    "title": "Garment and Related Trades Workers",
+    "exposure": 1,
+    "rationale": "Tailoring, embroidery, shoemaking and upholstery are manual skilled trades, predominantly self-employed in India. AI could assist pattern design at the margins, but the core work is physical."
+  },
+  {
+    "occ3": "811",
+    "title": "Mining and Mineral Processing Plant Operators",
+    "exposure": 1,
+    "rationale": "Mining, quarrying, drilling and stone and cement plant work is physical and hazardous, much of it casual labour. AI has very little impact on the daily work."
+  },
+  {
+    "occ3": "813",
+    "title": "Chemical and Photographic Products Plant and Machine Operators",
+    "exposure": 2,
+    "rationale": "Chemical and pharmaceutical plant operators run and monitor process equipment; AI-based process control and quality analytics touch parts of the job. Most tasks still involve physically operating, loading and checking machines."
+  },
+  {
+    "occ3": "815",
+    "title": "Textile, Fur and Leather Products Machine Operators",
+    "exposure": 1,
+    "rationale": "Spinning, weaving, sewing, dyeing and laundry machine operators do manual machine-tending work. AI-based defect detection is a peripheral factor, with minimal effect on the core job."
+  },
+  {
+    "occ3": "817",
+    "title": "Wood Processing and Paper Making Plant Operators",
+    "exposure": 1,
+    "rationale": "Sawmill, plywood and paper plant operators perform physical machine-tending in often informal settings. AI has very little impact on the daily work."
+  },
+  {
+    "occ3": "821",
+    "title": "Assemblers",
+    "exposure": 2,
+    "rationale": "Assemblers put together mechanical and electrical components on production lines. Automation and AI vision inspection may reduce demand at the margins, but the work itself is manual."
+  },
+  {
+    "occ3": "832",
+    "title": "Car, Van and Motorcycle Drivers",
+    "exposure": 2,
+    "rationale": "Driving cars, taxis, autos and two-wheelers on Indian roads is real-time physical work in unpredictable environments. App-based dispatch and navigation are AI-driven, but autonomous vehicles are far from practical for Indian conditions."
+  },
+  {
+    "occ3": "834",
+    "title": "Mobile Plant Operators",
+    "exposure": 1,
+    "rationale": "Operating tractors, excavators, cranes and forklifts is hands-on machinery work in physical environments. AI-assisted automation is marginal in India's largely informal setting."
+  },
+  {
+    "occ3": "911",
+    "title": "Domestic, Hotel and Office Cleaners and Helpers",
+    "exposure": 1,
+    "rationale": "Domestic and establishment cleaners sweep, wash and tidy in person, largely employed by households. AI has essentially no impact on this work."
+  },
+  {
+    "occ3": "921",
+    "title": "Agricultural, Forestry and Fishery Labourers",
+    "exposure": 0,
+    "rationale": "Agricultural, forestry and fishery labourers do simple manual tasks, overwhelmingly as casual labour with very low formal education. AI has essentially no impact on their daily work."
+  },
+  {
+    "occ3": "932",
+    "title": "Manufacturing Labourers",
+    "exposure": 1,
+    "rationale": "Hand packers and manufacturing labourers perform manual tasks like loading, sorting and packing. AI has little direct effect beyond broader factory automation."
+  },
+  {
+    "occ3": "941",
+    "title": "Food Preparation Assistants",
+    "exposure": 1,
+    "rationale": "Food preparation assistants cook simple food, wash dishes and clean kitchens. The work is physical and AI does not touch it."
+  },
+  {
+    "occ3": "952",
+    "title": "Street Vendors (excluding Food)",
+    "exposure": 1,
+    "rationale": "Street vendors selling non-food goods are self-employed and work in person in public places. AI has essentially no impact on their core work."
+  },
+  {
+    "occ3": "962",
+    "title": "Other Elementary Workers",
+    "exposure": 2,
+    "rationale": "Delivery workers, porters, odd-job workers and meter readers do physical work; meter reading is being replaced by smart meters and delivery work is dispatched by algorithms. The core tasks remain manual and in-person."
+  }
+]

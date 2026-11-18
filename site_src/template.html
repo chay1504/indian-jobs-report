@@ -1,0 +1,620 @@
+<title>India Job Market Visualizer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Karpathy's single dark treemap page (kept on purpose), with an India report below the map. */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  color-scheme: dark;
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #181823;
+  --fg: #e0e0e8;
+  --fg2: #8b8b98;
+  --line: rgba(255,255,255,0.08);
+  --red: #f0442a;
+  --amber: #f0a020;
+  --green: #36b44a;
+  --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+#wrapper { max-width: 1400px; width: 100%; margin: 0 auto; padding-bottom: 120px; }
+#header { padding-block: 20px 16px; }
+a { color: var(--fg2); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+.intro { margin-bottom: 18px; max-width: 1100px; }
+.intro h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; text-wrap: balance; }
+.intro h1 a { font-size: 13px; font-weight: 400; color: var(--fg2); text-decoration: none; }
+.intro h1 a:hover { text-decoration: underline; }
+.intro p { font-size: 15px; line-height: 1.6; color: var(--fg2); margin-bottom: 8px; }
+.intro strong, .intro b { color: var(--fg); font-weight: 600; }
+.intro details { margin: 10px 0; }
+.intro summary { font-size: 14px; color: var(--fg2); cursor: pointer; user-select: none; }
+.intro summary:hover { color: var(--fg); }
+.prompt-box { margin-top: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 6px; padding: 12px 16px; font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--fg2); max-height: 300px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+
+.callout { border-left: 3px solid var(--red); padding: 10px 14px; background: rgba(240,68,42,0.06); margin: 12px 0 4px; font-size: 15px; line-height: 1.6; color: var(--fg); }
+.callout b { color: #fff; }
+
+.stats-row { display: flex; flex-wrap: wrap; gap: 20px 28px; align-items: flex-start; margin-bottom: 12px; }
+.stat-section { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.stat-section h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg2); }
+.stat-big { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat-label { font-size: 11px; color: var(--fg2); }
+.tier-bar { display: flex; flex-direction: column; gap: 3px; }
+.tier-row { display: flex; align-items: center; gap: 6px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.tier-color { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.tier-name { flex: 1; color: var(--fg2); white-space: nowrap; }
+.tier-jobs { text-align: right; white-space: nowrap; }
+.tier-pct { text-align: right; width: 34px; color: var(--fg2); font-size: 11px; }
+.histogram { display: flex; align-items: flex-end; gap: 2px; height: 54px; min-width: 120px; }
+.histogram .bar { flex: 1; border-radius: 1px 1px 0 0; min-height: 1px; }
+.hist-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--fg2); margin-top: 2px; }
+.hbar-chart { display: flex; flex-direction: column; gap: 3px; min-width: 200px; }
+.hbar-row { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.hbar-label { width: 78px; flex-shrink: 0; color: var(--fg2); font-size: 11px; text-align: right; }
+.hbar-track { flex: 1; height: 12px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; min-width: 36px; }
+.hbar-fill { height: 100%; border-radius: 2px; }
+.hbar-val { width: 40px; flex-shrink: 0; font-size: 11px; color: var(--fg); text-align: right; font-variant-numeric: tabular-nums; }
+
+.controls-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.color-toggle { display: flex; gap: 4px; flex-wrap: wrap; }
+.color-toggle button { padding: 6px 14px; font-size: 12px; font-weight: 500; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; background: transparent; color: var(--fg2); cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.color-toggle button.active { background: rgba(255,255,255,0.08); color: var(--fg); border-color: rgba(255,255,255,0.22); }
+.color-toggle button:hover:not(.active) { background: rgba(255,255,255,0.04); }
+.color-toggle button.new::after { content: "India"; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; margin-left: 6px; color: var(--amber); }
+.gradient-legend { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--fg2); }
+.gradient-legend canvas { border-radius: 2px; }
+
+#mapbox { position: relative; }
+canvas#canvas { display: block; cursor: default; touch-action: manipulation; }
+
+#tooltip { position: fixed; pointer-events: none; background: var(--bg2); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 16px; font-size: 13px; line-height: 1.5; width: 340px; max-width: calc(100vw - 24px); opacity: 0; transition: opacity 0.12s; z-index: 20; box-shadow: 0 8px 32px rgba(0,0,0,0.6); }
+#tooltip.visible { opacity: 1; }
+#tooltip .tt-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; color: #fff; }
+#tooltip .tt-code { font-size: 11px; color: var(--fg2); margin-bottom: 6px; }
+#tooltip .tt-exposure { font-size: 12px; margin-bottom: 8px; }
+#tooltip .tt-stats { display: grid; grid-template-columns: auto auto; gap: 2px 12px; font-size: 12px; font-variant-numeric: tabular-nums; }
+#tooltip .tt-stats .label { color: var(--fg2); }
+#tooltip .tt-stats .value { color: var(--fg); text-align: right; }
+#tooltip .tt-rationale { font-size: 11px; color: var(--fg2); margin-top: 8px; line-height: 1.4; border-top: 1px solid var(--line); padding-top: 8px; }
+
+/* ── Report ── */
+#report { margin-top: 56px; max-width: 1100px; }
+#report h2 { font-size: 24px; letter-spacing: -0.02em; margin-bottom: 10px; text-wrap: balance; }
+#report h3.sec { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg2); margin: 40px 0 12px; font-weight: 600; }
+#report p, #report li { font-size: 15px; line-height: 1.65; color: var(--fg2); max-width: 72ch; }
+#report p b, #report li b { color: var(--fg); }
+#report ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.lede { font-size: 17px !important; color: var(--fg) !important; }
+
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+.verdict { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; background: var(--bg2); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.verdict .claim { font-size: 13px; color: var(--fg2); line-height: 1.45; }
+.pill { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; }
+.pill.yes { background: rgba(240,68,42,0.16); color: #ff7a63; }
+.pill.part { background: rgba(240,160,32,0.16); color: #ffc04d; }
+.pill.no { background: rgba(54,180,74,0.16); color: #6fd47e; }
+.verdict .num { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; color: var(--fg); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.verdict .why { font-size: 13px; color: var(--fg2); line-height: 1.5; }
+
+.triple { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+.triple-row { display: grid; grid-template-columns: 150px 1fr; gap: 12px; align-items: center; }
+.triple-row .lbl { font-size: 13px; color: var(--fg); text-align: right; }
+.triple-row .lbl small { display: block; color: var(--fg2); font-size: 11px; }
+.stack { display: flex; height: 30px; border-radius: 3px; overflow: hidden; background: rgba(255,255,255,0.03); }
+.stack div { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.92); white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+.legend-inline { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--fg2); margin-top: 10px; }
+.legend-inline span { display: inline-flex; align-items: center; gap: 6px; }
+.legend-inline i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+.tablewrap { overflow-x: auto; margin-top: 10px; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { color: var(--fg2); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; background: var(--bg2); }
+td.r, th.r { text-align: right; }
+tr:last-child td { border-bottom: none; }
+td .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 8px; vertical-align: baseline; }
+
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 10px; }
+.compare > div { background: var(--bg2); padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.compare .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--fg2); }
+.compare .v { display: flex; gap: 16px; align-items: baseline; font-variant-numeric: tabular-nums; }
+.compare .v b { font-size: 22px; letter-spacing: -0.02em; }
+.compare .v span { font-size: 12px; color: var(--fg2); }
+.sources li { font-size: 13px !important; }
+.foot { margin-top: 48px; font-size: 12px; color: var(--fg2); border-top: 1px solid var(--line); padding-top: 16px; max-width: 72ch; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  .intro h1 { font-size: 22px; }
+  .triple-row { grid-template-columns: 1fr; gap: 4px; }
+  .triple-row .lbl { text-align: left; }
+  .stat-big { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div id="wrapper">
+<div id="header">
+  <div class="intro">
+    <h1>India Job Market Visualizer <a href="#report">Read the report ↓</a> <a href="https://github.com/karpathy/jobs">Based on karpathy/jobs</a></h1>
+    <p>This is an India version of Andrej Karpathy's <a href="https://karpathy.ai/jobs/">US Job Market Visualizer</a>. It shows <b>127 occupations</b> (every NCO-2015 occupation group that appears in the data) covering <b id="introJobs">—</b> workers aged 15+, built from the unit-level records of MoSPI's <a href="https://microdata.gov.in/NADA/index.php/catalog/284">Periodic Labour Force Survey, January–December 2025</a> (11.5 lakh people surveyed). Each rectangle's <b>area</b> is proportional to the number of workers. <b>Color</b> shows the selected layer. Hover or tap a tile for details.</p>
+    <p><b>What changed for India:</b> India has no equivalent of the BLS ten-year outlook, so that layer is replaced by <b>Formal jobs</b> (share of workers who are regular salaried employees with social security). A new <b>Income tax</b> layer shows the share of each occupation's workers who earn above today's ₹12 lakh zero-tax line, and the report below estimates how much of India's income tax each occupation pays. The <b>Digital AI Exposure</b> layer uses Karpathy's scoring prompt word for word, run twice independently per occupation and averaged.</p>
+    <details>
+      <summary>View the Digital AI Exposure scoring prompt (Karpathy's, source sentence adapted)</summary>
+      <div class="prompt-box" id="promptBox"></div>
+    </details>
+    <p><b>Caveat on Digital AI Exposure scores:</b> these are rough LLM estimates, not predictions. A high score does not mean the job will disappear; demand for software, analysis or teaching could grow as each worker becomes more productive. Scores describe how digital the work is, and do not account for demand elasticity, regulation, cost of adoption in India, or social preference for human workers.</p>
+    <div class="callout" id="headlineCallout">Loading…</div>
+  </div>
+
+  <div class="controls-row">
+    <div class="stat-section">
+      <h3>Layer</h3>
+      <div class="color-toggle" id="colorToggle">
+        <button data-mode="formal" class="new">Formal jobs</button>
+        <button data-mode="pay">Median Earnings</button>
+        <button data-mode="education">Education</button>
+        <button data-mode="exposure" class="active">Digital AI Exposure</button>
+        <button data-mode="tax" class="new">Income tax</button>
+      </div>
+    </div>
+    <div class="gradient-legend">
+      <span id="legendLow">Low</span>
+      <canvas id="gradientLegend" width="80" height="8"></canvas>
+      <span id="legendHigh">High</span>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-section">
+      <h3>Total workers</h3>
+      <div class="stat-big" id="statTotalJobs">—</div>
+      <div class="stat-label">age 15+, 2025</div>
+    </div>
+    <div class="stat-section" id="block2"></div>
+    <div class="stat-section" id="block3"></div>
+    <div class="stat-section" id="block4"></div>
+    <div class="stat-section" id="block5"></div>
+    <div class="stat-section" id="block6"></div>
+    <div class="stat-section" id="block7"></div>
+    <div class="stat-section" id="block8"></div>
+  </div>
+</div>
+
+<div id="mapbox"><canvas id="canvas" aria-label="Treemap of Indian occupations sized by number of workers"></canvas></div>
+
+<section id="report">
+  <h2>Is AI aimed at India's income-tax base?</h2>
+  <p class="lede" id="lede">Loading…</p>
+
+  <h3 class="sec">The claim, checked piece by piece</h3>
+  <div class="verdicts" id="verdicts"></div>
+
+  <h3 class="sec">Jobs, earnings and income tax by AI exposure</h3>
+  <p>Each bar splits a total by the AI exposure of the occupation it comes from. The top bar is people. The bottom bar is the income tax they pay under today's law. The same five colors line up very differently.</p>
+  <div class="triple" id="triple"></div>
+  <div class="legend-inline" id="tripleLegend"></div>
+
+  <h3 class="sec">US and India on the same scale</h3>
+  <p>Both maps use the same scoring prompt and the same 0–10 scale. The US figures come from Karpathy's published data (342 BLS occupations, 2024).</p>
+  <div class="compare" id="compare"></div>
+
+  <h3 class="sec">Who pays: the occupations behind India's income tax</h3>
+  <p>Estimated share of individual income tax under the FY 2025-26 rules, by occupation. The estimate takes CBDT's actual distribution of returns by income (AY 2023-24) and splits each income band between occupations using PLFS 2025: salary income goes by the occupations of salaried high earners, and business and professional income by the occupations of self-employed high earners.</p>
+  <div class="tablewrap"><table id="taxTable"></table></div>
+
+  <h3 class="sec">How exposed is the tax base? A stress test</h3>
+  <p id="stressIntro"></p>
+  <div class="tablewrap"><table id="stressTable"></table></div>
+
+  <h3 class="sec">What the official data says</h3>
+  <ul id="facts"></ul>
+
+  <h3 class="sec">Why it is less alarming than it sounds, and why it still matters</h3>
+  <ul id="nuance"></ul>
+
+  <h3 class="sec">Method</h3>
+  <ul id="method"></ul>
+
+  <h3 class="sec">Sources</h3>
+  <ul class="sources" id="sources"></ul>
+
+  <p class="foot">A research tool, like the original: not an official statistic or a forecast. PLFS unit-level data is published by MoSPI for estimating employment and unemployment indicators; the earnings-based tax figures here are this project's own estimates and are labelled as such. Built November 2026.</p>
+</section>
+</div>
+
+<div id="tooltip" role="status">
+  <div class="tt-title"></div>
+  <div class="tt-code"></div>
+  <div class="tt-exposure"></div>
+  <div class="tt-stats"></div>
+  <div class="tt-rationale"></div>
+</div>
+
+<script id="data-json" type="application/json">__DATA__</script>
+<script id="meta-json" type="application/json">__META__</script>
+<script>
+const data = JSON.parse(document.getElementById("data-json").textContent);
+const META = JSON.parse(document.getElementById("meta-json").textContent);
+let colorMode = "exposure";
+
+// ── Color scales (Karpathy's) ──────────────────────────────────────────
+function boostContrast(t) { const c = (t - 0.5) * 2; const b = Math.sign(c) * Math.pow(Math.abs(c), 0.55); return b / 2 + 0.5; }
+function greenRedCSS(t, alpha) {
+  t = boostContrast(Math.max(0, Math.min(1, t)));
+  let r, g, b;
+  if (t < 0.5) { const s = t / 0.5; r = Math.round(30 + s * 200); g = Math.round(180 - s * 20); b = Math.round(40 - s * 20); }
+  else { const s = (t - 0.5) / 0.5; r = Math.round(230 + s * 25); g = Math.round(160 - s * 130); b = Math.round(20 - s * 5); }
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+const GREY = a => `rgba(128,128,128,${a})`;
+const PAY_LO = 40000, PAY_HI = 800000;
+function payT(v) { return (Math.log(Math.max(PAY_LO, Math.min(PAY_HI, v))) - Math.log(PAY_LO)) / (Math.log(PAY_HI) - Math.log(PAY_LO)); }
+function payColor(v, a) { return v == null ? GREY(a) : greenRedCSS(1 - payT(v), a); }
+function eduColor(ord, a) { return ord == null ? GREY(a) : greenRedCSS(1 - ord / 9, a); }
+function exposureColor(v, a) { return v == null ? GREY(a) : greenRedCSS(v / 10, a); }
+function formalColor(v, a) { return v == null ? GREY(a) : greenRedCSS(1 - Math.min(1, v / 0.8), a); }
+const TAX_LO = 0.0005, TAX_HI = 0.2;
+function taxT(v) { return (Math.log(Math.max(TAX_LO, Math.min(TAX_HI, v))) - Math.log(TAX_LO)) / (Math.log(TAX_HI) - Math.log(TAX_LO)); }
+function taxColor(v, a) { return v == null ? GREY(a) : (v <= 0 ? greenRedCSS(0, a) : greenRedCSS(taxT(v), a)); }
+function tileColorCSS(d, a) {
+  if (colorMode === "exposure") return exposureColor(d.exposure, a);
+  if (colorMode === "formal") return formalColor(d.formal, a);
+  if (colorMode === "pay") return payColor(d.pay, a);
+  if (colorMode === "education") return eduColor(d.edu_ord, a);
+  if (colorMode === "tax") return taxColor(d.taxpayer, a);
+  return GREY(a);
+}
+
+// ── Formatting (Indian units) ──────────────────────────────────────────
+function formatNumber(n) {
+  if (n == null) return "—";
+  if (n >= 1e7) return (n / 1e7).toFixed(n >= 1e8 ? 1 : 2) + " cr";
+  if (n >= 1e5) return (n / 1e5).toFixed(1) + " L";
+  if (n >= 1e3) return Math.round(n / 1e3) + "K";
+  return n.toLocaleString("en-IN");
+}
+function formatPay(n) { return n == null ? "—" : "₹" + Math.round(n).toLocaleString("en-IN"); }
+function payShort(n) { if (n == null) return "—"; return n >= 1e5 ? "₹" + (n / 1e5).toFixed(n >= 1e6 ? 0 : 1) + "L" : "₹" + Math.round(n / 1e3) + "K"; }
+const pct = (x, d = 0) => (x * 100).toFixed(d) + "%";
+const expFmt = v => v == null ? "—" : (Number.isInteger(v) ? v : v.toFixed(1));
+function tileSubInfo(r) {
+  const j = r.jobs ? " · " + formatNumber(r.jobs) : "";
+  if (colorMode === "exposure") return (r.exposure != null ? expFmt(r.exposure) + "/10" : "") + j;
+  if (colorMode === "formal") return pct(r.formal) + " formal" + j;
+  if (colorMode === "pay") return payShort(r.pay) + j;
+  if (colorMode === "education") return (r.education || "") + j;
+  if (colorMode === "tax") return (r.taxpayer >= 0.001 ? pct(r.taxpayer, 1) : "<0.1%") + " above ₹12L" + j;
+  return "";
+}
+
+// ── Squarified treemap (Karpathy's) ────────────────────────────────────
+function squarify(items, x, y, w, h) {
+  if (items.length === 0) return [];
+  if (items.length === 1) return [{ ...items[0], rx: x, ry: y, rw: w, rh: h }];
+  const total = items.reduce((s, d) => s + d.value, 0);
+  if (total === 0) return [];
+  const results = [];
+  let remaining = [...items], cx = x, cy = y, cw = w, ch = h;
+  while (remaining.length > 0) {
+    const remTotal = remaining.reduce((s, d) => s + d.value, 0);
+    const vertical = cw >= ch;
+    const side = vertical ? ch : cw;
+    let row = [remaining[0]], rowSum = remaining[0].value;
+    for (let i = 1; i < remaining.length; i++) {
+      const candidate = [...row, remaining[i]];
+      const candidateSum = rowSum + remaining[i].value;
+      if (worstAspect(candidate, candidateSum, side, remTotal, vertical ? cw : ch) < worstAspect(row, rowSum, side, remTotal, vertical ? cw : ch)) { row = candidate; rowSum = candidateSum; }
+      else break;
+    }
+    const rowFraction = rowSum / remTotal;
+    const rowThickness = vertical ? cw * rowFraction : ch * rowFraction;
+    let offset = 0;
+    for (const item of row) {
+      const itemLength = side * (item.value / rowSum);
+      if (vertical) results.push({ ...item, rx: cx, ry: cy + offset, rw: rowThickness, rh: itemLength });
+      else results.push({ ...item, rx: cx + offset, ry: cy, rw: itemLength, rh: rowThickness });
+      offset += itemLength;
+    }
+    if (vertical) { cx += rowThickness; cw -= rowThickness; } else { cy += rowThickness; ch -= rowThickness; }
+    remaining = remaining.slice(row.length);
+  }
+  return results;
+}
+function worstAspect(row, rowSum, side, totalArea, availableExtent) {
+  const rowExtent = availableExtent * (rowSum / totalArea);
+  if (rowExtent === 0) return Infinity;
+  let worst = 0;
+  for (const item of row) { const itemLen = side * (item.value / rowSum); if (itemLen === 0) continue; const aspect = Math.max(rowExtent / itemLen, itemLen / rowExtent); if (aspect > worst) worst = aspect; }
+  return worst;
+}
+
+// ── Rendering ──────────────────────────────────────────────────────────
+let rects = [], catRectsG = [], hovered = null, pinned = null;
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let dpr = window.devicePixelRatio || 1;
+const MARGIN = 0, GAP = 1.5;
+function layout() {
+  const w = document.getElementById("mapbox").clientWidth;
+  const h = Math.round(w * (w < 700 ? 1.25 : 0.75));
+  canvas.width = w * dpr; canvas.height = h * dpr; canvas.style.width = w + "px"; canvas.style.height = h + "px";
+  const byCategory = {};
+  for (const d of data) (byCategory[d.category] ||= []).push(d);
+  const categories = Object.keys(byCategory).map(cat => ({ cat, items: byCategory[cat].sort((a, b) => (b.jobs || 0) - (a.jobs || 0)), value: byCategory[cat].reduce((s, d) => s + (d.jobs || 1), 0) })).sort((a, b) => b.value - a.value);
+  catRectsG = squarify(categories, MARGIN, MARGIN, w - MARGIN * 2, h - MARGIN * 2);
+  rects = [];
+  for (const cr of catRectsG) {
+    const items = cr.items.map(d => ({ ...d, value: d.jobs || 1 }));
+    for (const ir of squarify(items, cr.rx + GAP, cr.ry + GAP, cr.rw - GAP * 2, cr.rh - GAP * 2)) rects.push(ir);
+  }
+}
+function draw() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = "#0a0a0f"; ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+  const active = pinned || hovered;
+  for (const r of rects) {
+    const isHov = active && r.slug === active.slug;
+    const g = GAP / 2, rx = r.rx + g, ry = r.ry + g, rw = r.rw - g * 2, rh = r.rh - g * 2;
+    if (rw <= 0 || rh <= 0) continue;
+    ctx.fillStyle = tileColorCSS(r, isHov ? 0.8 : 0.5); ctx.fillRect(rx, ry, rw, rh);
+    if (isHov) { ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.strokeRect(rx, ry, rw, rh); }
+    if (rw > 50 && rh > 18) {
+      ctx.save(); ctx.beginPath(); ctx.rect(rx + 4, ry + 2, rw - 8, rh - 4); ctx.clip();
+      const fontSize = Math.min(13, Math.max(9, Math.min(rw / 10, rh / 3)));
+      ctx.font = `500 ${fontSize}px -apple-system, system-ui, sans-serif`;
+      ctx.fillStyle = isHov ? "#fff" : "rgba(255,255,255,0.85)"; ctx.textBaseline = "top";
+      ctx.fillText(r.title, rx + 5, ry + 4);
+      if (rh > 34 && rw > 60) { ctx.font = `400 ${Math.max(8, fontSize - 2)}px -apple-system, system-ui, sans-serif`; ctx.fillStyle = "rgba(255,255,255,0.5)"; ctx.fillText(tileSubInfo(r), rx + 5, ry + 4 + fontSize + 2); }
+      ctx.restore();
+    }
+  }
+  // category labels on big blocks
+  ctx.font = "600 10px -apple-system, system-ui, sans-serif"; ctx.textBaseline = "bottom";
+  for (const c of catRectsG) {
+    if (c.rw < 120 || c.rh < 60) continue;
+    const label = c.cat.toUpperCase();
+    ctx.fillStyle = "rgba(10,10,15,0.55)"; const tw = ctx.measureText(label).width;
+    ctx.fillRect(c.rx + c.rw - tw - 12, c.ry + c.rh - 18, tw + 10, 15);
+    ctx.fillStyle = "rgba(255,255,255,0.6)"; ctx.fillText(label, c.rx + c.rw - tw - 7, c.ry + c.rh - 5);
+  }
+}
+function hitTest(mx, my) {
+  const rect = canvas.getBoundingClientRect(); const cx = mx - rect.left, cy = my - rect.top;
+  for (let i = rects.length - 1; i >= 0; i--) { const r = rects[i]; if (cx >= r.rx && cx < r.rx + r.rw && cy >= r.ry && cy < r.ry + r.rh) return r; }
+  return null;
+}
+function bar(widthPct, color) { return `<div style="margin-top:3px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;"><div style="height:100%;width:${Math.max(0, Math.min(100, widthPct))}%;background:${color};border-radius:2px;"></div></div>`; }
+function tooltipHighlight(d) {
+  if (colorMode === "exposure") { const c = exposureColor(d.exposure, 1); return `<span style="color:${c};font-weight:600;">Digital AI Exposure: ${expFmt(d.exposure)}/10</span> <span style="color:var(--fg2)">(passes: ${d.exposure_a}, ${d.exposure_b})</span>` + bar(d.exposure * 10, c); }
+  if (colorMode === "formal") { const c = formalColor(d.formal, 1); return `<span style="color:${c};font-weight:600;">Formal jobs: ${pct(d.formal)}</span>` + bar(d.formal * 100, c); }
+  if (colorMode === "pay") { const c = payColor(d.pay, 1); return `<span style="color:${c};font-weight:600;">Median earnings: ${formatPay(d.pay)}/yr</span>` + bar(payT(d.pay) * 100, c); }
+  if (colorMode === "education") { const c = eduColor(d.edu_ord, 1); return `<span style="color:${c};font-weight:600;">Typical education: ${d.education || "—"}</span>`; }
+  if (colorMode === "tax") { const c = taxColor(d.taxpayer, 1); return `<span style="color:${c};font-weight:600;">Above ₹12L tax line: ${d.taxpayer >= 0.001 ? pct(d.taxpayer, 1) : "<0.1%"}</span><div style="color:var(--fg2)">Est. share of India's income tax: <b style="color:var(--fg)">${pct(d.tax_share, 1)}</b></div>` + bar(taxT(d.taxpayer) * 100, c); }
+  return "";
+}
+function showTooltip(d, mx, my) {
+  const tt = document.getElementById("tooltip");
+  tt.querySelector(".tt-title").textContent = d.title;
+  tt.querySelector(".tt-code").textContent = `NCO-2015 group ${d.slug} · ${d.category}`;
+  tt.querySelector(".tt-exposure").innerHTML = tooltipHighlight(d);
+  tt.querySelector(".tt-stats").innerHTML = `
+    <span class="label">Workers (2025)</span><span class="value">${formatNumber(d.jobs)}</span>
+    <span class="label">Median earnings</span><span class="value">${formatPay(d.pay)}/yr</span>
+    <span class="label">Self-employed / regular / casual</span><span class="value">${pct(d.self)} / ${pct(d.regular)} / ${pct(d.casual)}</span>
+    <span class="label">Formal (salaried + social security)</span><span class="value">${pct(d.formal)}</span>
+    <span class="label">Graduate or above</span><span class="value">${pct(d.pct_grad)}</span>
+    <span class="label">Women · urban</span><span class="value">${pct(d.female)} · ${pct(d.urban)}</span>
+    <span class="label">Above ₹12L tax line</span><span class="value">${d.taxpayer >= 0.001 ? pct(d.taxpayer, 1) : "<0.1%"}</span>
+    <span class="label">Share of income tax (est.)</span><span class="value">${pct(d.tax_share, 1)}</span>
+    <span class="label">AI exposure · ILO index</span><span class="value">${expFmt(d.exposure)}/10 · ${d.ilo != null ? d.ilo.toFixed(2) : "—"}</span>`;
+  tt.querySelector(".tt-rationale").textContent = colorMode === "exposure" || colorMode === "tax" ? (d.exposure_rationale || "") : (d.n_obs < 100 ? `Small sample: ${d.n_obs} people surveyed.` : "");
+  const W = Math.min(340, window.innerWidth - 24);
+  let tx = mx + 16, ty = my - 16;
+  if (tx + W > window.innerWidth - 8) tx = Math.max(8, mx - W - 16);
+  const th = tt.offsetHeight || 260;
+  if (ty + th > window.innerHeight - 8) ty = Math.max(8, window.innerHeight - th - 8);
+  if (ty < 8) ty = 8;
+  tt.style.left = tx + "px"; tt.style.top = ty + "px"; tt.classList.add("visible");
+}
+function hideTooltip() { document.getElementById("tooltip").classList.remove("visible"); }
+
+// ── Stats blocks ───────────────────────────────────────────────────────
+const PAY_BANDS = [
+  { label: "<₹1L", min: 0, max: 100000 }, { label: "₹1–2L", min: 100000, max: 200000 },
+  { label: "₹2–3L", min: 200000, max: 300000 }, { label: "₹3–5L", min: 300000, max: 500000 },
+  { label: "₹5L+", min: 500000, max: Infinity },
+];
+const EDU_GROUPS = [
+  { label: "Below primary", lo: 0, hi: 2 }, { label: "Primary/Middle", lo: 3, hi: 4 }, { label: "Sec./Higher sec.", lo: 5, hi: 6 },
+  { label: "Diploma/Grad.", lo: 7, hi: 8 }, { label: "Postgrad+", lo: 9, hi: 9 },
+];
+const EXP_TIERS = [
+  { label: "Minimal (0–1)", lo: 0, hi: 2, mid: 0.5 }, { label: "Low (2–3)", lo: 2, hi: 4, mid: 2.5 },
+  { label: "Moderate (4–5)", lo: 4, hi: 6, mid: 4.5 }, { label: "High (6–7)", lo: 6, hi: 8, mid: 6.5 },
+  { label: "Very high (8–10)", lo: 8, hi: 11, mid: 9 },
+];
+const inTier = (d, t) => d.exposure != null && d.exposure >= t.lo && d.exposure < t.hi;
+function wavg(groups, filt, metric) {
+  return groups.map(g => { let s = 0, c = 0; for (const d of data) { const v = metric(d); if (v != null && d.jobs && filt(d, g)) { s += v * d.jobs; c += d.jobs; } } return { ...g, avg: c ? s / c : 0, jobs: c }; });
+}
+function renderTiers(tiers, total) { return tiers.map(t => `<div class="tier-row"><div class="tier-color" style="background:${t.color}"></div><span class="tier-name">${t.label}</span><span class="tier-jobs">${t.valText || formatNumber(t.jobs)}</span><span class="tier-pct">${total > 0 ? Math.round(t.jobs / total * 100) : 0}%</span></div>`).join(""); }
+function renderHbars(items) { return items.map(it => `<div class="hbar-row"><span class="hbar-label">${it.label}</span><div class="hbar-track"><div class="hbar-fill" style="width:${it.pct}%;background:${it.color}"></div></div><span class="hbar-val">${it.val}</span></div>`).join(""); }
+const $ = id => document.getElementById(id);
+const TOTAL = data.reduce((s, d) => s + (d.jobs || 0), 0);
+const EARN = d => (d.jobs || 0) * (d.pay_mean || 0);
+
+function updateStats() {
+  $("statTotalJobs").textContent = (TOTAL / 1e7).toFixed(1) + " cr";
+  ({ exposure: updateExposureStats, formal: updateFormalStats, pay: updatePayStats, education: updateEducationStats, tax: updateTaxStats })[colorMode]();
+}
+function updateExposureStats() {
+  let s = 0; for (const d of data) s += d.exposure * d.jobs; const avg = s / TOTAL;
+  $("block2").innerHTML = `<h3>Avg. exposure</h3><div class="stat-big"><span style="color:${exposureColor(avg, 1)}">${avg.toFixed(1)}</span></div><div class="stat-label">job-weighted, 0–10 (US: 4.9)</div>`;
+  const hist = new Array(11).fill(0); for (const d of data) hist[Math.round(d.exposure)] += d.jobs; const mx = Math.max(...hist);
+  $("block3").innerHTML = `<h3>Workers by exposure</h3><div class="histogram">${hist.map((c, i) => `<div class="bar" style="height:${Math.max(2, c / mx * 100)}%;background:${exposureColor(i, 0.7)}"></div>`).join("")}</div><div class="hist-labels"><span>0</span><span>5</span><span>10</span></div>`;
+  const tiers = EXP_TIERS.map(t => ({ ...t, jobs: data.filter(d => inTier(d, t)).reduce((s, d) => s + d.jobs, 0), color: exposureColor(t.mid, 1) }));
+  $("block4").innerHTML = `<h3>Exposure tiers</h3><div class="tier-bar">${renderTiers(tiers, TOTAL)}</div>`;
+  const byPay = wavg(PAY_BANDS, (d, g) => d.pay != null && d.pay >= g.min && d.pay < g.max, d => d.exposure);
+  $("block5").innerHTML = `<h3>Exposure by earnings</h3><div class="hbar-chart">${renderHbars(byPay.map(g => ({ label: g.label, val: g.avg.toFixed(1), pct: g.avg * 10, color: exposureColor(g.avg, 0.8) })))}</div>`;
+  const byEdu = wavg(EDU_GROUPS, (d, g) => d.edu_ord != null && d.edu_ord >= g.lo && d.edu_ord <= g.hi, d => d.exposure);
+  $("block6").innerHTML = `<h3>Exposure by education</h3><div class="hbar-chart">${renderHbars(byEdu.map(g => ({ label: g.label, val: g.jobs ? g.avg.toFixed(1) : "—", pct: g.avg * 10, color: exposureColor(g.avg, 0.8) })))}</div>`;
+  const hi = data.filter(d => d.exposure >= 7);
+  $("block7").innerHTML = `<h3>Jobs scoring 7+</h3><div class="stat-big" style="color:${exposureColor(8, 1)}">${pct(hi.reduce((s, d) => s + d.jobs, 0) / TOTAL, 1)}</div><div class="stat-label">of workers (US: 34%)</div>`;
+  $("block8").innerHTML = `<h3>Income tax from 7+</h3><div class="stat-big" style="color:${exposureColor(8, 1)}">${pct(hi.reduce((s, d) => s + d.tax_share, 0))}</div><div class="stat-label">of individual income tax (est.)</div>`;
+}
+function updateFormalStats() {
+  let s = 0; for (const d of data) s += d.formal * d.jobs; const avg = s / TOTAL;
+  $("block2").innerHTML = `<h3>Formal jobs</h3><div class="stat-big"><span style="color:${formalColor(avg, 1)}">${pct(avg, 1)}</span></div><div class="stat-label">salaried with social security</div>`;
+  const b = [0, 0.02, 0.1, 0.25, 0.5, 0.75, 1.01]; const hist = b.slice(0, -1).map(() => 0);
+  for (const d of data) { const i = b.findIndex((x, k) => d.formal >= x && d.formal < b[k + 1]); if (i >= 0) hist[i] += d.jobs; }
+  const mx = Math.max(...hist);
+  $("block3").innerHTML = `<h3>Workers by formality</h3><div class="histogram">${hist.map((c, i) => `<div class="bar" style="height:${Math.max(2, c / mx * 100)}%;background:${formalColor((b[i] + b[i + 1]) / 2, 0.7)}"></div>`).join("")}</div><div class="hist-labels"><span>0%</span><span>25%</span><span>75%+</span></div>`;
+  const all = { reg: 0, self: 0, cas: 0 }; for (const d of data) { all.reg += d.regular * d.jobs; all.self += d.self * d.jobs; all.cas += d.casual * d.jobs; }
+  $("block4").innerHTML = `<h3>Type of work</h3><div class="tier-bar">${renderTiers([{ label: "Self-employed", jobs: all.self, color: formalColor(0, 1) }, { label: "Casual labour", jobs: all.cas, color: formalColor(0.1, 1) }, { label: "Regular salaried", jobs: all.reg, color: formalColor(0.7, 1) }], TOTAL)}</div>`;
+  const byPay = wavg(PAY_BANDS, (d, g) => d.pay != null && d.pay >= g.min && d.pay < g.max, d => d.formal);
+  $("block5").innerHTML = `<h3>Formal by earnings</h3><div class="hbar-chart">${renderHbars(byPay.map(g => ({ label: g.label, val: pct(g.avg), pct: g.avg * 100, color: formalColor(g.avg, 0.8) })))}</div>`;
+  const byExp = wavg(EXP_TIERS, (d, g) => inTier(d, g), d => d.formal);
+  $("block6").innerHTML = `<h3>Formal by AI exposure</h3><div class="hbar-chart">${renderHbars(byExp.map(g => ({ label: g.label.replace(/ \(.*/, ""), val: pct(g.avg), pct: g.avg * 100, color: formalColor(g.avg, 0.8) })))}</div>`;
+  $("block7").innerHTML = `<h3>No social security</h3><div class="stat-big">${((1 - avg) * TOTAL / 1e7).toFixed(0)} cr</div><div class="stat-label">workers outside formal jobs</div>`;
+  $("block8").innerHTML = "";
+}
+function updatePayStats() {
+  let s = 0, c = 0; for (const d of data) if (d.pay_mean) { s += d.pay_mean * d.jobs; c += d.jobs; }
+  const avg = s / c;
+  $("block2").innerHTML = `<h3>Avg. earnings</h3><div class="stat-big"><span style="color:${payColor(avg, 1)}">${payShort(avg)}</span></div><div class="stat-label">per year, job-weighted mean</div>`;
+  const bk = [0, 60000, 100000, 150000, 250000, 400000, Infinity]; const hist = bk.slice(0, -1).map(() => 0);
+  for (const d of data) { const i = bk.findIndex((x, k) => d.pay >= x && d.pay < bk[k + 1]); if (i >= 0) hist[i] += d.jobs; }
+  const mx = Math.max(...hist);
+  $("block3").innerHTML = `<h3>Workers by earnings</h3><div class="histogram">${hist.map((c2, i) => `<div class="bar" style="height:${Math.max(2, c2 / mx * 100)}%;background:${payColor([45000, 80000, 125000, 200000, 320000, 600000][i], 0.7)}"></div>`).join("")}</div><div class="hist-labels"><span>₹60K</span><span>₹1.5L</span><span>₹4L+</span></div>`;
+  const tiers = PAY_BANDS.map(t => ({ ...t, jobs: data.filter(d => d.pay >= t.min && d.pay < t.max).reduce((s2, d) => s2 + d.jobs, 0), color: payColor(t.max === Infinity ? 700000 : (t.min + t.max) / 2, 1) }));
+  $("block4").innerHTML = `<h3>Earnings tiers</h3><div class="tier-bar">${renderTiers(tiers, TOTAL)}</div>`;
+  const byEdu = wavg(EDU_GROUPS, (d, g) => d.edu_ord != null && d.edu_ord >= g.lo && d.edu_ord <= g.hi, d => d.pay_mean);
+  $("block5").innerHTML = `<h3>Earnings by education</h3><div class="hbar-chart">${renderHbars(byEdu.map(g => ({ label: g.label, val: g.jobs ? payShort(g.avg) : "—", pct: payT(g.avg || PAY_LO) * 100, color: payColor(g.avg, 0.8) })))}</div>`;
+  const byExp = wavg(EXP_TIERS, (d, g) => inTier(d, g), d => d.pay_mean);
+  $("block6").innerHTML = `<h3>Earnings by AI exposure</h3><div class="hbar-chart">${renderHbars(byExp.map(g => ({ label: g.label.replace(/ \(.*/, ""), val: payShort(g.avg), pct: payT(g.avg) * 100, color: payColor(g.avg, 0.8) })))}</div>`;
+  const tot = data.reduce((s2, d) => s2 + EARN(d), 0);
+  $("block7").innerHTML = `<h3>Total earnings</h3><div class="stat-big">₹${(tot / 1e12).toFixed(0)}L cr</div><div class="stat-label">per year, from work (PLFS)</div>`;
+  $("block8").innerHTML = "";
+}
+function updateEducationStats() {
+  let g = 0; for (const d of data) g += d.pct_grad * d.jobs;
+  $("block2").innerHTML = `<h3>Graduate+</h3><div class="stat-big"><span style="color:${eduColor(8, 1)}">${pct(g / TOTAL)}</span></div><div class="stat-label">of all workers</div>`;
+  const groups = EDU_GROUPS.map((gr, i) => ({ ...gr, jobs: data.filter(d => d.edu_ord != null && d.edu_ord >= gr.lo && d.edu_ord <= gr.hi).reduce((s, d) => s + d.jobs, 0), color: eduColor((gr.lo + gr.hi) / 2, 1) }));
+  const mx = Math.max(...groups.map(x => x.jobs));
+  $("block3").innerHTML = `<h3>Occupations by typical education</h3><div class="histogram">${groups.map(x => `<div class="bar" style="height:${Math.max(2, x.jobs / mx * 100)}%;background:${x.color.replace(",1)", ",0.7)")}"></div>`).join("")}</div><div class="hist-labels"><span>None</span><span>Class 10</span><span>PG</span></div>`;
+  $("block4").innerHTML = `<h3>Typical education tiers</h3><div class="tier-bar">${renderTiers(groups, TOTAL)}</div>`;
+  const pay = wavg(EDU_GROUPS, (d, gr) => d.edu_ord != null && d.edu_ord >= gr.lo && d.edu_ord <= gr.hi, d => d.pay_mean);
+  $("block5").innerHTML = `<h3>Earnings by education</h3><div class="hbar-chart">${renderHbars(pay.map(x => ({ label: x.label, val: x.jobs ? payShort(x.avg) : "—", pct: payT(x.avg || PAY_LO) * 100, color: payColor(x.avg, 0.8) })))}</div>`;
+  const ex = wavg(EDU_GROUPS, (d, gr) => d.edu_ord != null && d.edu_ord >= gr.lo && d.edu_ord <= gr.hi, d => d.exposure);
+  $("block6").innerHTML = `<h3>AI exposure by education</h3><div class="hbar-chart">${renderHbars(ex.map(x => ({ label: x.label, val: x.jobs ? x.avg.toFixed(1) : "—", pct: x.avg * 10, color: exposureColor(x.avg, 0.8) })))}</div>`;
+  $("block7").innerHTML = `<h3>Typical: below Class 10</h3><div class="stat-big">${pct(groups.slice(0, 2).reduce((s, x) => s + x.jobs, 0) / TOTAL)}</div><div class="stat-label">of workers are in such occupations</div>`;
+  $("block8").innerHTML = "";
+}
+function updateTaxStats() {
+  let tp = 0; for (const d of data) tp += d.taxpayer * d.jobs;
+  $("block2").innerHTML = `<h3>Above ₹12L line</h3><div class="stat-big"><span style="color:${taxColor(0.05, 1)}">${pct(tp / TOTAL, 1)}</span></div><div class="stat-label">of workers by earnings from work (PLFS)</div>`;
+  const tiers = EXP_TIERS.map(t => ({ ...t, jobs: data.filter(d => inTier(d, t)).reduce((s, d) => s + d.tax_share, 0), color: exposureColor(t.mid, 1) }));
+  $("block3").innerHTML = `<h3>Income tax by AI exposure</h3><div class="tier-bar">${tiers.map(t => `<div class="tier-row"><div class="tier-color" style="background:${t.color}"></div><span class="tier-name">${t.label}</span><span class="tier-pct" style="width:40px;color:var(--fg)">${pct(t.jobs)}</span></div>`).join("")}</div>`;
+  const jt = EXP_TIERS.map(t => ({ ...t, jobs: data.filter(d => inTier(d, t)).reduce((s, d) => s + d.jobs, 0), color: exposureColor(t.mid, 1) }));
+  $("block4").innerHTML = `<h3>Workers by AI exposure</h3><div class="tier-bar">${jt.map(t => `<div class="tier-row"><div class="tier-color" style="background:${t.color}"></div><span class="tier-name">${t.label}</span><span class="tier-pct" style="width:40px;color:var(--fg)">${pct(t.jobs / TOTAL)}</span></div>`).join("")}</div>`;
+  const top = [...data].sort((a, b) => b.tax_share - a.tax_share).slice(0, 5);
+  $("block5").innerHTML = `<h3>Top income-tax occupations</h3><div class="hbar-chart">${renderHbars(top.map(d => ({ label: d.title.split(/[ ,]/)[0] + "…", val: pct(d.tax_share), pct: d.tax_share / top[0].tax_share * 100, color: exposureColor(d.exposure, 0.8) })))}</div><div class="stat-label">bar color = AI exposure</div>`;
+  $("block6").innerHTML = `<h3>Personal income tax</h3><div class="stat-big">~${META.pit_share_central}</div><div class="stat-label">of the Centre's gross tax revenue</div>`;
+  $("block7").innerHTML = `<h3>Paid by top 1% of adults</h3><div class="stat-big" style="color:${taxColor(0.1, 1)}">~${META.top1_adults}</div><div class="stat-label">of individual income tax (AY 2023-24)</div>`;
+  $("block8").innerHTML = "";
+}
+
+// ── Events ─────────────────────────────────────────────────────────────
+canvas.addEventListener("mousemove", e => { if (pinned) return; const hit = hitTest(e.clientX, e.clientY); if (hit !== hovered) { hovered = hit; draw(); } if (hovered) { showTooltip(hovered, e.clientX, e.clientY); canvas.style.cursor = "pointer"; } else { hideTooltip(); canvas.style.cursor = "default"; } });
+canvas.addEventListener("click", e => { const hit = hitTest(e.clientX, e.clientY); if (hit && (!pinned || pinned.slug !== hit.slug)) { pinned = hit; showTooltip(hit, e.clientX, e.clientY); } else { pinned = null; hideTooltip(); } draw(); });
+canvas.addEventListener("mouseleave", () => { if (pinned) return; hovered = null; hideTooltip(); draw(); });
+document.addEventListener("click", e => { if (pinned && e.target !== canvas) { pinned = null; hideTooltip(); draw(); } });
+window.addEventListener("scroll", () => { if (pinned) { pinned = null; hideTooltip(); draw(); } }, { passive: true });
+function resize() { dpr = window.devicePixelRatio || 1; layout(); draw(); }
+const LEGEND = { exposure: ["Low", "High"], formal: ["Formal", "Informal"], pay: ["₹8L", "₹40K"], education: ["Postgrad", "None"], tax: ["None", "20%+ above ₹12L"] };
+function drawGradientLegend() {
+  const g = $("gradientLegend").getContext("2d");
+  for (let x = 0; x < 80; x++) { g.fillStyle = greenRedCSS(x / 79, 1); g.fillRect(x, 0, 1, 8); }
+  $("legendLow").textContent = LEGEND[colorMode][0]; $("legendHigh").textContent = LEGEND[colorMode][1];
+}
+$("colorToggle").addEventListener("click", e => {
+  const btn = e.target.closest("button"); if (!btn || !btn.dataset.mode) return;
+  colorMode = btn.dataset.mode;
+  document.querySelectorAll("#colorToggle button").forEach(b => b.classList.toggle("active", b === btn));
+  updateStats(); drawGradientLegend(); requestAnimationFrame(resize);
+});
+
+// ── Report ─────────────────────────────────────────────────────────────
+function buildReport() {
+  const M = META;
+  const share = f => data.filter(f).reduce((s, d) => s + d.jobs, 0) / TOTAL;
+  const taxOf = f => data.filter(f).reduce((s, d) => s + d.tax_share, 0);
+  const totalEarn = data.reduce((s, d) => s + EARN(d), 0);
+  const earnOf = f => data.filter(f).reduce((s, d) => s + EARN(d), 0) / totalEarn;
+  const j7 = share(d => d.exposure >= 7), t7 = taxOf(d => d.exposure >= 7), t6 = taxOf(d => d.exposure >= 6), j6 = share(d => d.exposure >= 6);
+  const t4 = taxOf(d => d.exposure >= 4), j4 = share(d => d.exposure >= 4);
+  const avg = data.reduce((s, d) => s + d.exposure * d.jobs, 0) / TOTAL;
+  const taxAvg = data.reduce((s, d) => s + d.exposure * d.tax_share, 0) / data.reduce((s, d) => s + d.tax_share, 0);
+
+  $("introJobs").textContent = (TOTAL / 1e7).toFixed(1) + " crore";
+  $("headlineCallout").innerHTML = `India's map is mostly green: the average worker scores <b>${avg.toFixed(1)}/10</b> on AI exposure, against <b>4.9</b> in the US. But weighted by income tax paid, the average is <b>${taxAvg.toFixed(1)}</b>. Occupations scoring 7 or more employ <b>${pct(j7, 1)}</b> of workers and pay an estimated <b>${pct(t7)}</b> of individual income tax.`;
+  $("lede").innerHTML = `Yes, the overlap is real. The jobs AI reaches first in India are few, but they are the jobs that pay the income tax. Occupations scoring 6 or more on Karpathy's scale hold <b>${pct(j6, 1)}</b> of India's workers and pay an estimated <b>${pct(t6)}</b> of individual income tax; counting the moderate tier as well, <b>${pct(j4)}</b> of workers pay <b>${pct(t4)}</b>. The danger is narrower than "most of India's tax": income tax from individuals is about a quarter of the Centre's tax revenue, and GST and corporate tax come from a much wider base.`;
+
+  const V = [
+    { claim: "“India will show much less red than the US.”", pill: "yes", tag: "True", num: `${avg.toFixed(1)} vs 4.9`, why: `Job-weighted exposure. ${pct(share(d => d.exposure < 2))} of Indian workers are in occupations scoring 0–1 (farming, construction, labour). Only ${pct(j7, 1)} score 7+, against 34% in the US.` },
+    { claim: "“Most tax is paid by the top ~2%.”", pill: "part", tag: "True for income tax only", num: M.top2_workforce, why: `The top 2% of a 60-crore workforce pays ${M.top2_workforce} of individual income tax, and the top 1% of adults about ${M.top1_adults} (CBDT, AY 2023-24). But that tax is only about ${M.pit_share_central} of the Centre's gross tax revenue and about ${M.pit_share_gg} of all government taxes.` },
+    { claim: "“Those 2% are exactly the jobs in red.”", pill: "yes", tag: "Largely true", num: `${pct(t6)}–${pct(M.t6_adj)}`, why: `Share of income tax from occupations scoring 6+ (${pct(j6, 1)} of workers). The range depends on how corporate heads inside “Managing directors & chief executives” are scored; most of that group in India are shop owners (95% self-employed).` },
+    { claim: "“So AI is a danger to the tax base.”", pill: "part", tag: "A real but bounded risk", num: `−${pct(M.stress_6_10, 1)}`, why: `Fall in individual income tax if earnings in 6+ occupations dropped 10%. Tax falls ${M.elasticity}× faster than income because the slabs are progressive. Exposure is not job loss, and the hit is to income tax, not to GST.` },
+  ];
+  $("verdicts").innerHTML = V.map(v => `<div class="verdict"><div class="claim">${v.claim}</div><span class="pill ${v.pill}">${v.tag}</span><div class="num">${v.num}</div><div class="why">${v.why}</div></div>`).join("");
+
+  // triple bars
+  const tierColor = t => exposureColor(t.mid, 0.85);
+  const rows = [
+    { lbl: "Workers", sub: (TOTAL / 1e7).toFixed(1) + " crore", f: t => share(d => inTier(d, t)) },
+    { lbl: "Earnings from work", sub: "PLFS, all workers", f: t => earnOf(d => inTier(d, t)) },
+    { lbl: "Individual income tax", sub: "est., FY 2025-26 rules", f: t => taxOf(d => inTier(d, t)) },
+  ];
+  $("triple").innerHTML = rows.map(r => `<div class="triple-row"><div class="lbl">${r.lbl}<small>${r.sub}</small></div><div class="stack">${EXP_TIERS.map(t => { const v = r.f(t); return `<div style="width:${v * 100}%;background:${tierColor(t)}" title="${t.label}: ${pct(v, 1)}">${v > 0.06 ? pct(v) : ""}</div>`; }).join("")}</div></div>`).join("");
+  $("tripleLegend").innerHTML = EXP_TIERS.map(t => `<span><i style="background:${tierColor(t)}"></i>${t.label}</span>`).join("");
+
+  // US vs India
+  const C = [
+    ["Avg. exposure (job-weighted)", avg.toFixed(1), "4.9"],
+    ["Workers in jobs scoring 7+", pct(j7, 1), "34.3%"],
+    ["Earnings in jobs scoring 7+", pct(earnOf(d => d.exposure >= 7), 1), "41.1%"],
+    ["Workers in jobs scoring 0–1", pct(share(d => d.exposure < 2)), "4.4%"],
+    ["Earnings-weighted exposure", (data.reduce((s, d) => s + d.exposure * EARN(d), 0) / totalEarn).toFixed(1), "5.4"],
+  ];
+  $("compare").innerHTML = C.map(c => `<div><span class="k">${c[0]}</span><div class="v"><b style="color:${exposureColor(7, 1)}">${c[1]}</b><span>India</span></div><div class="v"><b>${c[2]}</b><span>US</span></div></div>`).join("");
+
+  // tax table
+  const top = [...data].sort((a, b) => b.tax_share - a.tax_share).slice(0, 15);
+  $("taxTable").innerHTML = `<thead><tr><th>Occupation (NCO-2015)</th><th class="r">Share of income tax</th><th class="r">AI exposure</th><th class="r">Workers</th><th class="r">Above ₹12L</th><th class="r">Median earnings</th></tr></thead><tbody>${top.map(d => `<tr><td><span class="sw" style="background:${exposureColor(d.exposure, 0.9)}"></span>${d.title} <span style="color:var(--fg2)">${d.slug}</span></td><td class="r">${pct(d.tax_share, 1)}</td><td class="r">${expFmt(d.exposure)}</td><td class="r">${formatNumber(d.jobs)}</td><td class="r">${pct(d.taxpayer, 1)}</td><td class="r">${payShort(d.pay)}</td></tr>`).join("")}<tr><td><b>Top 15 combined</b></td><td class="r"><b>${pct(top.reduce((s, d) => s + d.tax_share, 0))}</b></td><td></td><td class="r"><b>${formatNumber(top.reduce((s, d) => s + d.jobs, 0))}</b></td><td></td><td></td></tr></tbody>`;
+
+  // stress test
+  $("stressIntro").innerHTML = `What happens to individual income tax if AI cuts earnings in exposed occupations, through lower pay, slower hiring or fewer jobs? On CBDT's actual income distribution, a 10% fall in income cuts tax by about ${pct(M.itr_drop_10)} (elasticity ${M.elasticity}), because people move down the slabs and some fall below the ₹12 lakh line. Applied to each group's estimated tax share:`;
+  $("stressTable").innerHTML = `<thead><tr><th>Earnings fall in occupations scoring…</th><th class="r">Workers affected</th><th class="r">Their share of tax</th><th class="r">−5%</th><th class="r">−10%</th><th class="r">−20%</th></tr></thead><tbody>${M.stress.map(r => `<tr><td>${r.thr}+ on AI exposure</td><td class="r">${pct(share(d => d.exposure >= r.thr), 1)}</td><td class="r">${pct(r.share)}</td>${r.drops.map(x => `<td class="r">−${pct(x, 1)}</td>`).join("")}</tr>`).join("")}<tr><td colspan="6" style="color:var(--fg2);white-space:normal">Cells show the fall in total individual income tax. For scale, −${pct(M.stress_6_10, 1)} of ${M.pit_individual_lcr} is about ₹${(M.stress_6_10 * M.pit_individual_num).toFixed(2)} lakh crore a year.</td></tr></tbody>`;
+
+  $("facts").innerHTML = M.facts.map(f => `<li>${f}</li>`).join("");
+  $("nuance").innerHTML = M.nuance.map(f => `<li>${f}</li>`).join("");
+  $("method").innerHTML = M.method.map(f => `<li>${f}</li>`).join("");
+  $("sources").innerHTML = M.sources.map(s => `<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>${s[2] ? " — " + s[2] : ""}</li>`).join("");
+  $("promptBox").textContent = M.prompt;
+}
+
+buildReport();
+updateStats();
+drawGradientLegend();
+resize();
+window.addEventListener("resize", resize);
+</script>

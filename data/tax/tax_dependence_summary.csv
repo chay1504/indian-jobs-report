@@ -1,0 +1,16 @@
+metric,value,formula,unit
+"Individuals share of non-company income-tax liability, AY2023-24",82.75,ind_tax_AY2324 / (all-status tax payable - company tax payable),percent
+Individual tax payable AY2023-24 as % of central gross tax revenue FY2022-23,22.18,"677,351 / 30,54,191",percent
+Individual tax payable AY2023-24 as % of general-govt (centre+states) tax receipts FY2022-23,14.08,"677,351 / 48,09,044",percent
+"Tax paid by top 1% of adults (20+), AY2023-24, as % of central GTR FY2022-23",19.71,"0.8888 x 677,351 / 30,54,191",percent
+"Tax paid by top 1% of adults (20+), AY2023-24, as % of general-govt tax FY2022-23",12.52,"0.8888 x 677,351 / 48,09,044",percent
+ESTIMATE: individual income tax FY2024-25 (Rs crore),978876.0,"(NCT 12,35,161 - STT 52,197) x individual share of non-company liability AY2023-24",Rs crore
+ESTIMATE: individual income tax as % of central GTR FY2024-25,25.78,"above / 37,96,382",percent
+ESTIMATE: individual income tax as % of general-govt tax 2024-25 (RE),16.1,"above / 60,80,098",percent
+ESTIMATE: top 1% of adults share of central GTR FY2024-25 (using AY2023-24 concentration),22.92,top1 share x estimate / GTR,percent
+ESTIMATE: top 1% of adults share of general-govt tax 2024-25 (RE),14.31,top1 share x estimate / GG tax,percent
+Corporation tax as % of central GTR FY2024-25,25.99,"9,86,767 / 37,96,382",percent
+ESTIMATE: ~877 companies with PBT>Rs500cr as % of central GTR FY2024-25,14.08,"0.5418 x 9,86,767 / 37,96,382 (FY23-24 share applied to FY24-25)",percent
+Computer & related services (IT/ITeS/BPO) share of company gross tax payable FY2023-24,10.9,"98,025.38 / 8,99,662.24",percent
+Financial intermediation share of company gross tax payable FY2023-24,27.15,"244,226.55 / 8,99,662.24",percent
+ESTIMATE: IT/ITeS companies corporate tax as % of central GTR FY2024-25,2.83,IT share x CIT / GTR,percent

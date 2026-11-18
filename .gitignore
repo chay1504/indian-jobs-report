@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local tooling
+.claude/
+
+# PLFS unit-level data (2.3 GB). Download it yourself from microdata.gov.in (free login);
+# MoSPI's terms do not allow redistributing it.
+data/microdata/
+
+# Unit-level extract of the microdata (one row per surveyed person)
+data/derived/earners_2025.parquet
+
+# Source PDFs and bulk downloads (1.4 GB); every URL is listed in research/*.md
+data/raw/

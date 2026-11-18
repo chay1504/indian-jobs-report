@@ -1,0 +1,18 @@
+level,code,in_nco2015,in_isco08,nco_title
+division,0,False,True,
+division,COUNT nco=9 isco=10 common=9,,,
+sub_division,01,False,True,
+sub_division,02,False,True,
+sub_division,03,False,True,
+sub_division,COUNT nco=40 isco=43 common=40,,,
+group,011,False,True,
+group,021,False,True,
+group,031,False,True,
+group,COUNT nco=127 isco=130 common=127,,,
+family,6115,True,False,Medicinal and Aromatic Plant Cultivators
+family,6116,True,False,Agriculture Information Management
+family,7419,True,False,"Electrical and Electronic Equipment Mechanics and Fitters and Related Workers, Not Elsewhere Classified"
+family,0110,False,True,
+family,0210,False,True,
+family,0310,False,True,
+family,COUNT nco=436 isco=436 common=433,,,
